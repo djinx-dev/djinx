@@ -5,6 +5,41 @@ import { Config } from "../src/config"
 import { Atom } from "../src/atoms"
 
 
+const conf: Config = {
+  generators: {
+    bg: (k, v) => ({
+      background: v,
+    }),
+
+    fg: (k, v) => ({
+      color: v,
+    }),
+  },
+
+  modifiers: {
+    sm: { '@media': 'screen and (min-width: 320px)' },
+    md: { '@media': 'screen and (min-width: 768px)' },
+    lg: { '@media': 'screen and (min-width: 1024px)' },
+    hover: { selector: ':hover' },
+    focus: { selector: ':focus' },
+    before: { "::element": "::before"},
+    after: { "::element": "::after"},
+  },
+}
+
+const prop = "bg"
+const decls = "blue@md+lg+before+after+hover+focus, red@sm"
+
+describe("split(conf: Config, prop: string, decls: string): [string, string, AtomGen, string[]][]", () => {
+  test("Split a prop declaration into its parts", ({ expect }) => {
+    expect(split(conf, prop, decls)).toStrictEqual([
+      [".bg\\:blue", "blue", conf.generators.bg, ["md", "lg", "before", "after", "hover", "focus"]],
+      [".bg\\:red", "red", conf.generators.bg, ["sm"]],
+    ])
+  })
+})
+
+
 const wrappers = ["@media screen and (min-width: 768px)", "@media screen and (min-width: 1024px)"]
 const selectors = [".bg\\:blue:before:hover", ".bg\\:blue:after:hover"]
 const propsAtom = {
@@ -49,41 +84,6 @@ describe("fuse(atom: Atom, selectors: string[], wrappers: string[]=[]): Atom | n
         background: "blue",
       }
     })
-  })
-})
-
-
-const conf: Config = {
-  generators: {
-    bg: (k, v) => ({
-      background: v,
-    }),
-
-    fg: (k, v) => ({
-      color: v,
-    }),
-  },
-
-  modifiers: {
-    sm: { '@media': 'screen and (min-width: 320px)' },
-    md: { '@media': 'screen and (min-width: 768px)' },
-    lg: { '@media': 'screen and (min-width: 1024px)' },
-    hover: { selector: ':hover' },
-    focus: { selector: ':focus' },
-    before: { "::element": "::before"},
-    after: { "::element": "::after"},
-  },
-}
-
-const prop = "bg"
-const decls = "blue@md+lg+before+after+hover+focus, red@sm"
-
-describe("split(conf: Config, prop: string, decls: string): [string, string, AtomGen, string[]][]", () => {
-  test("Split a prop declaration into its parts", ({ expect }) => {
-    expect(split(conf, prop, decls)).toStrictEqual([
-      [".bg\\:blue", "blue", conf.generators.bg, ["md", "lg", "before", "after", "hover", "focus"]],
-      [".bg\\:red", "red", conf.generators.bg, ["sm"]],
-    ])
   })
 })
 
