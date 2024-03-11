@@ -1,6 +1,7 @@
 {
-  "name": "@djinx/core",
+  "name": "@djinx/monorepo",
   "version": "0.1.0",
+  "private": true,
   "description": "Tiny SSR and CSR CSS-in-JS framework",
   "main": "index.js",
   "scripts": {
