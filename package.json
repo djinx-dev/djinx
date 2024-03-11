@@ -1,0 +1,30 @@
+{
+  "name": "@djinx/core",
+  "version": "0.1.0",
+  "description": "Tiny SSR and CSR CSS-in-JS framework",
+  "main": "index.js",
+  "scripts": {
+    "test": "vitest",
+    "core": "pnpm --filter @djinx/core",
+    "solid": "pnpm --filter @djinx/solid"
+  },
+  "repository": {
+    "type": "git",
+    "url": "github.com/djinx/djinx"
+  },
+  "keywords": [
+    "css-in-js",
+    "css",
+    "typescript",
+    "atomic",
+    "SSR",
+    "CSR"
+  ],
+  "author": "Adrien de Pierres",
+  "license": "MIT",
+  "type": "module",
+  "devDependencies": {
+    "@types/node": "^20.11.25",
+    "vitest": "^1.3.1"
+  }
+}
