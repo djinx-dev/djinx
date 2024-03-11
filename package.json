@@ -7,7 +7,7 @@
   "scripts": {
     "test": "vitest",
     "core": "pnpm --filter @djinx/core",
-    "solid": "pnpm --filter @djinx/solid"
+    "solidstart": "pnpm --filter @djinx/solidstart"
   },
   "repository": {
     "type": "git",
