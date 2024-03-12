@@ -1,6 +1,7 @@
 import { FetchEvent } from "@solidjs/start/server"
 import { getRequestEvent, isServer } from "solid-js/web"
-import { Sheet, Config } from "@djinx/core"
+import { Sheet, Config, css as _css } from "@djinx/core"
+export { default as DjinxSheet } from "./components/DjinxSheet"
 
 
 export function getSheet() {
