@@ -4,6 +4,13 @@ import { Sheet, Config, css as _css } from "@djinx/core"
 export { default as DjinxSheet } from "./components/DjinxSheet"
 
 
+export function createCssFn(conf: Config) {
+  return function css(styles: Record<string, string>) {
+    const sheet = getSheet()
+    return _css(conf, sheet, styles)
+  }
+}
+
 export function getSheet() {
   if (isServer) {
     const req = getRequestEvent()!
