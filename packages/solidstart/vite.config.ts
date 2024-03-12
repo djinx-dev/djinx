@@ -12,6 +12,9 @@ export default defineConfig({
       formats: ["es"],
       fileName: "main",
     },
+    rollupOptions: {
+      external: ["solid-js", "solid-js/web", "@solidjs/start"]
+    },
   },
   resolve: { alias: { src: resolve("src/") } },
   plugins: [dts(), solidPlugin()],
