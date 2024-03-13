@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest"
-import { djinxPlugin } from "../src/main"
+import { djinxPlugin } from "../src/index"
 import { FetchEvent } from "@solidjs/start/server"
 
 
