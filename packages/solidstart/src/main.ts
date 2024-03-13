@@ -1,13 +1,19 @@
 import { FetchEvent } from "@solidjs/start/server"
 import { getRequestEvent, isServer } from "solid-js/web"
+import { splitProps } from "solid-js"
 import { Sheet, Config, css as _css } from "@djinx/core"
 export { default as DjinxSheet } from "./components/DjinxSheet"
 
 
 export function createCssFn(conf: Config) {
+  const genKeys = Object.keys(conf.generators)
+
   return function css(styles: Record<string, string>) {
     const sheet = getSheet()
-    return _css(conf, sheet, styles)
+    const [gens, others] = splitProps(styles, genKeys)
+
+    _css(conf, sheet, gens)
+    return others
   }
 }
 
