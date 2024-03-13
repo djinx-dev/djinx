@@ -7,6 +7,10 @@ import { cssEscape } from "./utils"
 export function css(conf: Config, sheet: Record<string, Atom | null>, styles: Record<string, string>) {
   for (const [prop, decls] of Object.entries(styles)) {
     for (const [selector, value, atomGen, modifiers] of split(conf, prop, decls)){
+      if (!value || atomGen == null) {
+        continue
+      }
+
       const key = `${prop}:${value}@${modifiers.join("+")}`
 
       // if this selector already exists, skip
@@ -24,9 +28,9 @@ export function css(conf: Config, sheet: Record<string, Atom | null>, styles: Re
   return sheet
 }
 
-export function split(conf: Config, prop: string, decls: string): [string, string, AtomGen, string[]][] {
+export function split(conf: Config, prop: string, decls: string): [string, string, AtomGen | undefined, string[]][] {
   return decls.split(/,+ */).map((decl) => {
-    const [value, modifiers=""] = decl.split("@")
+    const [value="", modifiers=""] = decl.split("@")
     const selector = "." + cssEscape(`${prop}:${value}`)
     const atomGen = conf.generators[prop]
 
@@ -49,7 +53,7 @@ export function fuse(atom: Atom, selectors: string[], wrappers: string[]=[]) {
 
   for (let i = wrappers.length - 1; i >= 0; i--) {
     atom = {
-      [wrappers[i]]: atom,
+      [wrappers[i]!]: atom,
     }
   }
 
