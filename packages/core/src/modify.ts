@@ -3,7 +3,7 @@ import { Config } from "./config"
 
 export type ModifierTypes = ({ "@media": string } | { "@container": string } | { "selector": string } | { "::element": string })
 
-export function modify(conf: Config, selector: string, modifiers: string[]) {
+export function modify(conf: Config, selector: string, modifiers: string[]): [string[], string[]] {
   const selectors: string[] = [selector]
   const wrappers: string[] = []
 
