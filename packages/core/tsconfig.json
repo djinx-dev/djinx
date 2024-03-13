@@ -5,7 +5,6 @@
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
     "useDefineForClassFields": true,
     "skipLibCheck": true,
-
     "types": [],
     "baseUrl": ".",
 
