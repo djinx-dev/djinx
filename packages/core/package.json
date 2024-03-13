@@ -1,27 +1,61 @@
 {
   "name": "@djinx/core",
-  "description": "Tiny SSR and CSR CSS-in-JS framework",
   "version": "0.1.0",
+  "description": "Tiny SSR and CSR CSS-in-JS framework",
+  "license": "MIT",
+  "author": "Adrien de Pierres",
   "type": "module",
-  "main": "./dist/main.js",
-  "module": "./dist/main.js",
-  "types": "./dist/main.d.ts",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "exports": {
-    "types": "./dist/main.d.ts",
-    "import": "./dist/main.js",
-    "node": "./dist/main.js",
-    "default": "./dist/main.js"
+    "development": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/dev.js"
+      }
+    },
+    "import": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
   },
   "scripts": {
-    "test": "vitest",
-    "dev": "vite",
-    "build": "tsc && vite build",
-    "preview": "vite preview"
+    "dev": "vite serve dev",
+    "build": "tsup",
+    "test": "concurrently pnpm:test:*",
+    "test:client": "vitest",
+    "test:ssr": "pnpm run test:client --mode ssr",
+    "prepublishOnly": "pnpm build",
+    "format": "prettier --ignore-path .gitignore -w \"src/**/*.{js,ts,json,css,tsx,jsx}\" \"dev/**/*.{js,ts,json,css,tsx,jsx}\"",
+    "lint": "concurrently pnpm:lint:*",
+    "lint:code": "eslint --ignore-path .gitignore --max-warnings 0 src/**/*.{js,ts,tsx,jsx}",
+    "lint:types": "tsc --noEmit",
+    "update-deps": "pnpm up -Li"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/djinx-dev/djinx.git"
+  },
+  "homepage": "https://github.com/djinx-dev/djinx#readme",
+  "bugs": {
+    "url": "https://github.com/djinx-dev/djinx/issues"
+  },
+  "files": [
+    "dist"
+  ],
   "devDependencies": {
     "@types/node": "^20.11.25",
-    "typescript": "^5.2.2",
-    "vite": "^5.1.4",
-    "vite-plugin-dts": "^3.7.3"
-  }
+    "concurrently": "^8.2.2",
+    "tsup": "^8.0.2",
+    "tsup-preset-solid": "^2.2.0",
+    "typescript": "^5.2.2"
+  },
+  "packageManager": "pnpm@8.15.4",
+  "engines": {
+    "node": ">=18",
+    "pnpm": ">=8.6.0"
+  },
+  "browser": {},
+  "typesVersions": {}
 }
