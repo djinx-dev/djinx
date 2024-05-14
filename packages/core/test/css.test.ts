@@ -22,6 +22,8 @@ const conf: Config = {
     lg: { "@media": "screen and (min-width: 1024px)" },
     hover: { selector: ':hover' },
     focus: { selector: ':focus' },
+    checked: { selector: ':checked' },
+    child: { selector: ' > *' },
     before: { "::element": "::before"},
     after: { "::element": "::after"},
   },
@@ -98,7 +100,7 @@ describe("css(conf: Config, sheet: Sheet, styles: Record<string, string>): Sheet
       "bg:blue@md+lg+before+after+hover+focus": {
         "@media screen and (min-width: 768px)": {
           "@media screen and (min-width: 1024px)": {
-            ".bg\\:blue:before:hover, .bg\\:blue:after:hover": {
+            ".bg\\:blue:hover:focus::before, .bg\\:blue:hover:focus::after": {
               background: "blue",
             }
           }
