@@ -92,8 +92,8 @@ describe("fuse(atom: Atom, selectors: string[], wrappers: string[]=[]): Atom | n
 
 const sheet: Record<string, Atom | null> = {}
 
-describe("css(conf: Config, sheet: Sheet, styles: Record<string, string>): Sheet", () => {
-  test("Take a conf, sheet, and styles and return a Sheet of atoms", ({ expect }) => {
+describe("css", () => {
+  test("Complex multi declaration bg prop", ({ expect }) => {
     expect(css(conf, sheet, {
       bg: "blue@md+lg+before+after+hover+focus, red@sm, pink",
     })).toStrictEqual({
@@ -119,6 +119,5 @@ describe("css(conf: Config, sheet: Sheet, styles: Record<string, string>): Sheet
         },
       },
     })
-
   })
 })
