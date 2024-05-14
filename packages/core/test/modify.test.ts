@@ -29,11 +29,19 @@ const conf: Config = {
 }
 
 describe("modify", () => {
-  test("selector, modifiers -> selectors, wrappers", ({ expect }) => {
+  test("many complex modifiers", ({ expect }) => {
     expect(modify(conf, ".bg\\:blue", ["sm", "md", "before", "after", "child", "checked", "hover"]))
       .toStrictEqual([
         [".bg\\:blue > *:checked:hover::before", ".bg\\:blue > *:checked:hover::after",],
         ["@media screen and (min-width: 320px)", "@media screen and (min-width: 768px)",],
+      ])
+  })
+
+  test("single modifier", ({ expect }) => {
+    expect(modify(conf, ".bg\\:red", ["sm"]))
+      .toStrictEqual([
+        [".bg\\:red",],
+        ["@media screen and (min-width: 320px)",],
       ])
   })
 })

@@ -27,7 +27,7 @@ export function modify(conf: Config, selector: string, modifiers: string[]): [st
   }
 
   const compSelector = selectors.join("")
-  const selectorList = elements.map((elm) => `${compSelector}${elm}`)
+  const selectorList = elements.length === 0 ? [compSelector] : elements.map((elm) => `${compSelector}${elm}`)
 
   return [selectorList, wrappers]
 }
