@@ -17,9 +17,9 @@ const conf: Config = {
   },
 
   modifiers: {
-    sm: { '@media': 'screen and (min-width: 320px)' },
-    md: { '@media': 'screen and (min-width: 768px)' },
-    lg: { '@media': 'screen and (min-width: 1024px)' },
+    sm: { "@media": "screen and (min-width: 320px)" },
+    md: { "@media": "screen and (min-width: 768px)" },
+    lg: { "@media": "screen and (min-width: 1024px)" },
     hover: { selector: ':hover' },
     focus: { selector: ':focus' },
     before: { "::element": "::before"},
