@@ -44,4 +44,11 @@ describe("modify", () => {
         ["@media screen and (min-width: 320px)",],
       ])
   })
+
+  test("zero modifiers", ({ expect }) => {
+    expect(modify(conf, ".bg\\:pink", []))
+      .toStrictEqual([
+        [".bg\\:pink",], [],
+      ])
+  })
 })
