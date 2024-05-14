@@ -95,23 +95,28 @@ const sheet: Record<string, Atom | null> = {}
 describe("css(conf: Config, sheet: Sheet, styles: Record<string, string>): Sheet", () => {
   test("Take a conf, sheet, and styles and return a Sheet of atoms", ({ expect }) => {
     expect(css(conf, sheet, {
-      bg: "blue@md+lg+before+after+hover+focus, red@sm",
+      bg: "blue@md+lg+before+after+hover+focus, red@sm, pink",
     })).toStrictEqual({
       "bg:blue@md+lg+before+after+hover+focus": {
         "@media screen and (min-width: 768px)": {
           "@media screen and (min-width: 1024px)": {
             ".bg\\:blue:hover:focus::before, .bg\\:blue:hover:focus::after": {
               background: "blue",
-            }
-          }
-        }
+            },
+          },
+        },
       },
       "bg:red@sm": {
         "@media screen and (min-width: 320px)": {
           ".bg\\:red": {
             background: "red",
-          }
-        }
+          },
+        },
+      },
+      "bg:pink": {
+        ".bg\\:pink": {
+          background: "pink",
+        },
       },
     })
 

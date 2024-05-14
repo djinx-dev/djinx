@@ -11,7 +11,7 @@ export function css(conf: Config, sheet: Record<string, Atom | null>, styles: Re
         continue
       }
 
-      const key = `${prop}:${value}@${modifiers.join("+")}`
+      const key = `${prop}:${value}${modifiers.length > 0 ? "@" : ""}${modifiers.join("+")}`
 
       // if this selector already exists, skip
       if (Object.hasOwn(sheet, key)) {
@@ -30,11 +30,11 @@ export function css(conf: Config, sheet: Record<string, Atom | null>, styles: Re
 
 export function split(conf: Config, prop: string, decls: string): [string, string, AtomGen | undefined, string[]][] {
   return decls.split(/,+ */).map((decl) => {
-    const [value="", modifiers=""] = decl.split("@")
+    const [value="", modifiers] = decl.split("@")
     const selector = "." + cssEscape(`${prop}:${value}`)
     const atomGen = conf.generators[prop]
 
-    return [selector, value, atomGen, modifiers.split("+")]
+    return [selector, value, atomGen, modifiers?.split("+") || []]
   })
 }
 
