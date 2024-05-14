@@ -6,6 +6,7 @@ export type ModifierTypes = ({ "@media": string } | { "@container": string } | {
 export function modify(conf: Config, selector: string, modifiers: string[]): [string[], string[]] {
   const selectors: string[] = [selector]
   const wrappers: string[] = []
+  const elements: string[] = []
 
   for (const k of modifiers) {
     const mod = conf.modifiers[k]
@@ -15,19 +16,18 @@ export function modify(conf: Config, selector: string, modifiers: string[]): [st
     }
 
     if ("selector" in mod) {
-      for (let i = 0; i < selectors.length; i++) {
-        selectors[i] = `${selectors[i]}${mod.selector}`
-      }
+      selectors.push(mod.selector)
     } else if ("@media" in mod) {
       wrappers.push(`@media ${mod["@media"]}`)
     } else if ("@container" in mod) {
       wrappers.push(`@container ${mod["@container"]}`)
     } else if ("::element" in mod) {
-      const last = selectors.pop()!
-      selectors.push(`${last}${mod["::element"]}`)
-      selectors.push(last)
+      elements.push(mod["::element"])
     }
   }
 
-  return [selectors, wrappers]
+  const compSelector = selectors.join("")
+  const selectorList = elements.map((elm) => `${compSelector}${elm}`)
+
+  return [selectorList, wrappers]
 }
