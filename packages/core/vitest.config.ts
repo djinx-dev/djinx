@@ -17,6 +17,9 @@ export default defineConfig(({ mode }) => {
       }),
     ],
     test: {
+      // chaiConfig: {
+      //   truncateThreshold: 10000,
+      // },
       watch: false,
       isolate: !testSSR,
       env: {
@@ -27,14 +30,13 @@ export default defineConfig(({ mode }) => {
       },
       environment: testSSR ? 'node' : 'jsdom',
       transformMode: { web: [/\.[jt]sx$/] },
-      ...(testSSR
-        ? {
-            include: ['test/server.test.{ts,tsx}'],
-          }
-        : {
-            include: ['test/*.test.{ts,tsx}'],
-            exclude: ['test/server.test.{ts,tsx}'],
-          }),
+      ...(testSSR ? {
+          include: ['test/server.test.{ts,tsx}'],
+        } : {
+          include: ['test/*.test.{ts,tsx}'],
+          exclude: ['test/server.test.{ts,tsx}'],
+        }
+      ),
     },
     resolve: {
       conditions: testSSR ? ['node'] : ['browser', 'development'],
