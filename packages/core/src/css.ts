@@ -30,7 +30,7 @@ export function css(conf: Config, sheet: Record<string, Atom | null>, styles: Re
 
 export function split(conf: Config, prop: string, decls: string): [string, string, AtomGen | undefined, string[]][] {
   return decls.trim().split(/\s*,+\s*/).map((decl) => {
-    const [value="", modifiers] = decl.split("@")
+    const [value="", modifiers] = decl.split(/\s*@\s*/)
     const selector = "." + cssEscape(`${prop}:${value}`)
     const atomGen = conf.generators[prop]
 
