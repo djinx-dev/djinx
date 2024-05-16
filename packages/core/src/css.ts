@@ -34,7 +34,7 @@ export function split(conf: Config, prop: string, decls: string): [string, strin
     const selector = "." + cssEscape(`${prop}:${value}`)
     const atomGen = conf.generators[prop]
 
-    return [selector, value, atomGen, modifiers?.split("+") || []]
+    return [selector, value, atomGen, modifiers?.split(/\s*\+\s*/) || []]
   })
 }
 
