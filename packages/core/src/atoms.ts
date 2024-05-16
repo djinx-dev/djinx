@@ -23,3 +23,5 @@ export function stringifyAtom(atom: Atom, tab="  ", tabDepth=0) {
   result.push(`${"".padEnd(tabDepth, tab)}}`)
   return result.join("\n")
 }
+
+export class GeneratorsBase {}
