@@ -24,4 +24,6 @@ export function stringifyAtom(atom: Atom, tab="  ", tabDepth=0) {
   return result.join("\n")
 }
 
-export class GeneratorsBase {}
+export type GeneratorsBase<P extends string> = {
+  [p in P]: (k: string, v: string) => Atom
+}

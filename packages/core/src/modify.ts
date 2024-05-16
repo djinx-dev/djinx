@@ -31,3 +31,7 @@ export function modify(conf: Config, selector: string, modifiers: string[]): [st
 
   return [selectorList, wrappers]
 }
+
+export type ModifiersBase<P extends string> = {
+  [p in P]: ModifierTypes
+}

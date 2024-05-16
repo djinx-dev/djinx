@@ -4,9 +4,9 @@ import { modify } from "./modify"
 import { cssEscape } from "./utils"
 
 
-export function css(conf: Config, sheet: Record<string, Atom | null>, styles: Record<string, string>) {
-  for (const [prop, decls] of Object.entries(styles)) {
-    for (const [selector, value, atomGen, modifiers] of split(conf, prop, decls)){
+export function css<G extends string, M extends string>(conf: Config<G, M>, sheet: Record<string, Atom | null>, styles: Record<G, string>) {
+  for (const [prop, decls] of Object.entries<string>(styles)) {
+    for (const [selector, value, atomGen, modifiers] of split(conf, prop as G, decls)){
       if (!value || atomGen == null) {
         continue
       }
@@ -28,13 +28,13 @@ export function css(conf: Config, sheet: Record<string, Atom | null>, styles: Re
   return sheet
 }
 
-export function split(conf: Config, prop: string, decls: string): [string, string, AtomGen | undefined, string[]][] {
+export function split<G extends string, M extends string>(conf: Config<G, M>, prop: G, decls: string): [string, string, AtomGen | undefined, M[]][] {
   return decls.trim().split(/\s*,+\s*/).map((decl) => {
     const [value="", modifiers] = decl.split(/\s*@\s*/)
     const selector = "." + cssEscape(`${prop}:${value}`)
     const atomGen = conf.generators[prop]
 
-    return [selector, value, atomGen, modifiers?.split(/\s*\+\s*/) || []]
+    return [selector, value, atomGen, (modifiers?.split(/\s*\+\s*/) || []) as M[]]
   })
 }
 
