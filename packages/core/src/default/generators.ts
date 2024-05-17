@@ -10,9 +10,13 @@ export type GeneratorProps = "bg"
   | "pack"
   | "realign"
   | "gap"
+  | "put"
   | "w"
   | "h"
-  | "put"
+  | "p"
+  | "m"
+  | "b"
+  | "r"
 
 export type Generators = GeneratorsBase<GeneratorProps>
 
@@ -79,6 +83,16 @@ export const generators: Generators = {
     return { gap: n || "" } as Atom
   },
 
+  // abs positioning
+  put(k: string, cv: string) { // inset
+    // xse, xs, xe, yse, ys, ye, xc, yc
+    // t r b l center
+
+    return {
+      position: "absolute",
+    }
+  },
+
   w(k: string, cv: string) {
     // w = "16px 8px..32px"
     const vr = cv.split(/\s+/)
@@ -95,14 +109,20 @@ export const generators: Generators = {
     return this.w(k, cv)
   },
 
-  // abs positioning
-  put(k: string, cv: string) { // inset
-    // xse, xs, xe, yse, ys, ye, xc, yc
-    // t r b l center
+  p(k: string, cv: string) {
+    return {}
+  },
 
-    return {
-      position: "absolute",
-    }
+  m(k: string, cv: string) {
+    return this.p(k, cv)
+  },
+
+  b(k: string, cv: string) {
+    return {}
+  },
+
+  r(k: string, cv: string) {
+    return {}
   },
 }
 
