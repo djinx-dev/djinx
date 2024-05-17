@@ -7,7 +7,7 @@ export type GeneratorProps = "bg"
   | "wrap"
   | "align"
   | "justify"
-  | "spread"
+  | "pack"
   | "gap"
   | "w"
   | "h"
@@ -64,8 +64,8 @@ export const generators: Generators = {
     return { "justify-items": v, }
   },
 
-  spread(k: string, v: string) {
-    return { "justify-content": v, }
+  pack(k: string, v: string) {
+    return { "align-content": v, }
   },
 
   gap(k: string, v: string) {
