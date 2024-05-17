@@ -8,9 +8,11 @@ export type GeneratorProps = "bg"
   | "align"
   | "justify"
   | "pack"
+  | "realign"
   | "gap"
   | "w"
   | "h"
+  | "put"
 
 export type Generators = GeneratorsBase<GeneratorProps>
 
@@ -68,6 +70,10 @@ export const generators: Generators = {
     return { "align-content": v, }
   },
 
+  realign(k: string, v: string) {
+    return  { "align-self": v, }
+  },
+
   gap(k: string, v: string) {
     const n = defUnits(v)
     return { gap: n || "" } as Atom
@@ -87,6 +93,16 @@ export const generators: Generators = {
 
   h(k: string, cv: string) {
     return this.w(k, cv)
+  },
+
+  // abs positioning
+  put(k: string, cv: string) { // inset
+    // xse, xs, xe, yse, ys, ye, xc, yc
+    // t r b l center
+
+    return {
+      position: "absolute",
+    }
   },
 }
 
