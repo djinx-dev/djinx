@@ -21,10 +21,21 @@ export type GeneratorProps = "bg"
 export type Generators = GeneratorsBase<GeneratorProps>
 
 export const generators: Generators = {
+  // background
   bg(k: string, v: string) {
-    return { background: v, }
+    return { background: v, fill: v, }
   },
 
+  // // midground
+  // mg(k: string, v: string) {
+  //   // fg // currentColor
+  //   // #000
+  //   // #000 #000
+  //   // #000 _ #000 _
+  //   return { "border-color": v, stroke: v, }
+  // },
+
+  // foreground
   fg(k: string, v: string) {
     return { color: v, }
   },
