@@ -165,7 +165,7 @@ function pmbr (k: string, cv: string, suffix="") {
   const tail = vals[vals.length - 1]
   let mode =  tail === "rel" || tail === "fix" ? vals.pop() : "fix"
   const atom: Atom = {}
-  mode = suffix === "radius" ? `${mode}-${suffix}` : mode
+  mode = suffix === "radius" ? `${mode}-rad` : mode
   suffix = suffix ? `-${suffix}` : ""
 
   switch (vals.length) {
@@ -196,14 +196,14 @@ const pmbrMap = {
   "b-rel": "inline-end",
   "c-rel": "block-end",
   "d-rel": "inline-start",
-  "a-fix-radius": "top-left",
-  "b-fix-radius": "top-right",
-  "c-fix-radius": "bottom-right",
-  "d-fix-radius": "bottom-left",
-  "a-rel-radius": "start-start",
-  "b-rel-radius": "start-end",
-  "c-rel-radius": "end-end",
-  "d-rel-radius": "end-start",
+  "a-fix-rad": "top-left",
+  "b-fix-rad": "top-right",
+  "c-fix-rad": "bottom-right",
+  "d-fix-rad": "bottom-left",
+  "a-rel-rad": "start-start",
+  "b-rel-rad": "start-end",
+  "c-rel-rad": "end-end",
+  "d-rel-rad": "end-start",
 }
 
 function isEmpty(v: any) {
