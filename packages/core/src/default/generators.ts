@@ -18,7 +18,7 @@ export type GeneratorProps = "bg"
   | "bw"
   | "bc"
   | "bs"
-  | "r"
+  | "br"
   | "s"
 
 export type Generators = GeneratorsBase<GeneratorProps>
@@ -147,7 +147,7 @@ export const generators: Generators = {
     return pmbr(k, cv, "style")
   },
 
-  r(k: string, cv: string) {
+  br(k: string, cv: string) {
     return pmbr(k, cv, "radius")
   },
 
