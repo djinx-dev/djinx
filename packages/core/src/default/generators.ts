@@ -113,9 +113,9 @@ export const generators: Generators = {
     const [val, mm=""] = vr.length > 1 ? vr : vr[0]?.includes("..") ? ["", ...vr] : vr
     const [min, max] = mm.split("..")
     const atom: Atom = {}
-    val && (atom[`${lookup[k]}`] = val)
-    min && (atom[`min-${lookup[k]}`] = min)
-    max && (atom[`max-${lookup[k]}`] = max)
+    !isEmpty(val) && (atom[`${lookup[k]}`] = defUnits(val))
+    !isEmpty(min) && (atom[`min-${lookup[k]}`] = defUnits(min))
+    !isEmpty(max) && (atom[`max-${lookup[k]}`] = defUnits(max))
     return atom
   },
 
