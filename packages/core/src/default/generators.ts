@@ -15,7 +15,9 @@ export type GeneratorProps = "bg"
   | "h"
   | "p"
   | "m"
-  | "b"
+  | "bw"
+  | "bc"
+  | "bs"
   | "r"
   | "s"
 
@@ -122,19 +124,45 @@ export const generators: Generators = {
   },
 
   p(k: string, cv: string) {
-    return {}
+    // 2 _ 2 2
+    // 2 2 2 2 rel
+    // 2 2 fix
+    // 2
+
+    const prop = lookup[k]!
+    const vals = cv.split(/\s+/)
+    const ort = vals[vals.length - 1] === "rel" ? vals.pop()
+    return pmbr(prop, vals)
   },
 
   m(k: string, cv: string) {
-    return this.p(k, cv)
+    const prop = lookup[k]!
+    const vals = cv.split(/\s+/)
+    return pmbr(prop, vals)
   },
 
-  b(k: string, cv: string) {
-    return {}
+  bw(k: string, cv: string) {
+    const prop = lookup[k]!
+    const vals = cv.split(/\s+/)
+    return pmbr(prop, vals, "width")
+  },
+
+  bc(k: string, cv: string) {
+    const prop = lookup[k]!
+    const vals = cv.split(/\s+/)
+    return pmbr(prop, vals, "color")
+  },
+
+  bs(k: string, cv: string) {
+    const prop = lookup[k]!
+    const vals = cv.split(/\s+/)
+    return pmbr(prop, vals, "style")
   },
 
   r(k: string, cv: string) {
-    return {}
+    const prop = lookup[k]!
+    const vals = cv.split(/\s+/)
+    return pmbr(prop, vals, "radius")
   },
 
   s(k: string, cv: string) {
@@ -142,6 +170,28 @@ export const generators: Generators = {
   },
 }
 
+function pmbr (prop: string, vals: string[], suffix="") {
+  const atom: Atom = {}
+  suffix = suffix ? `-${suffix}` : ""
+
+  switch (vals.length) {
+  case 1:
+    !isEmpty(vals[0]) && (atom[prop] = defUnits(vals[0]) || "")
+    break
+  case 2:
+    !isEmpty(vals[0]) && (atom[`${prop}-inline${suffix}`] = defUnits(vals[0]) || "")
+    !isEmpty(vals[1]) && (atom[`${prop}-block${suffix}`] = defUnits(vals[1]) || "")
+    break
+  case 4:
+    !isEmpty(vals[0]) && (atom[`${prop}-block-start${suffix}`] = defUnits(vals[0]) || "")
+    !isEmpty(vals[1]) && (atom[`${prop}-inline-end${suffix}`] = defUnits(vals[1]) || "")
+    !isEmpty(vals[2]) && (atom[`${prop}-block-end${suffix}`] = defUnits(vals[2]) || "")
+    !isEmpty(vals[3]) && (atom[`${prop}-inline-start${suffix}`] = defUnits(vals[3]) || "")
+    break
+  }
+
+  return atom
+}
 
 // *** Util functions and objects ***
 
