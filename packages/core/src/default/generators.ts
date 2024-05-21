@@ -20,6 +20,11 @@ export type GeneratorProps = "bg"
   | "bs"
   | "br"
   | "sh"
+  | "taln"
+  | "tjst"
+  | "trln"
+  | "tdir"
+  | "tort"
 
 export type Generators = GeneratorsBase<GeneratorProps>
 
@@ -154,6 +159,38 @@ export const generators: Generators = {
   sh(k: string, v: string) {
     return {
       "box-shadow": v,
+    }
+  },
+
+  taln(k: string, v: string) {
+    return {
+      "> *": {
+        "vertical-align": v,
+      },
+    }
+  },
+
+  tjst(k: string, v: string) {
+    return {
+      "text-align": v,
+    }
+  },
+
+  trln(k: string, v: string) {
+    return {
+      "vertical-align": v,
+    }
+  },
+
+  tdir(k: string, v: string) {
+    return {
+      "writing-mode": v,
+    }
+  },
+
+  tort(k: string, v: string) {
+    return {
+      "text-orientation": v,
     }
   },
 }
