@@ -13,6 +13,7 @@ export type GeneratorProps = "bg"
   | "put"
   | "w"
   | "h"
+  | "ratio"
   | "p"
   | "m"
   | "bw"
@@ -126,6 +127,10 @@ export const generators: Generators = {
 
   h(k: string, cv: string) {
     return this.w(k, cv)
+  },
+
+  ratio(k: string, v: string) {
+    return { "aspect-ratio": v, }
   },
 
   p(k: string, cv: string) {
