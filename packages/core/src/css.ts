@@ -29,7 +29,7 @@ export function css<G extends string, M extends string>(conf: Config<G, M>, shee
 }
 
 export function split<G extends string, M extends string>(conf: Config<G, M>, prop: G, decls: string): [string, string, AtomGen | undefined, M[]][] {
-  return decls.trim().split(/\s*,+\s*/).map((decl) => {
+  return decls.trim().split(/\s*;+\s*/).map((decl) => {
     const [value="", modifiers] = decl.split(/\s*@\s*/)
     const selector = "." + cssEscape(`${prop}:${value}`)
     const atomGen = conf.generators[prop]
