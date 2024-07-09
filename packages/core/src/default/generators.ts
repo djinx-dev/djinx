@@ -109,7 +109,7 @@ export const generators: Generators = {
     // t r b l center
 
     return {
-      position: "absolute",
+      inset: cv,
     }
   },
 
